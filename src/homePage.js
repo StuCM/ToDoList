@@ -12,7 +12,14 @@ export default class homePage {
         const sidebar = document.createElement('div');
         main.appendChild(sidebar);
         sidebar.classList.add('sidebar');
-        sidebar.innerHTML = 'sidebar';
+
+        const logo = document.createElement('div');
+        sidebar.appendChild(logo);
+        sidebar.classList.add('logo');
+        logo.innerText = 'To Do List';
+
+        const line = document.createElement('hr');
+        sidebar.appendChild(line);
 
         const toDoContainer = document.createElement('div')
         main.appendChild(toDoContainer);
@@ -22,6 +29,10 @@ export default class homePage {
         toDoContainer.appendChild(title);
         title.classList.add('title');
         title.innerHTML = 'ToDoList';
+
+        const lineToDo = document.createElement('hr');
+        toDoContainer.appendChild(lineToDo);
+        lineToDo.classList.add('align-left');
 
         const toDoList = document.createElement('div');
         toDoContainer.appendChild(toDoList);

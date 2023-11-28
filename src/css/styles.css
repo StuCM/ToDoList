@@ -1,0 +1,74 @@
+/* css reset */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Source Sans Pro', sans-serif;
+
+}
+
+/* color variables */
+
+html {
+    --primary-color: #C3BEBA;
+    --secondary-color: #575353;
+    --background-color: #ECECEC;
+    --font-color: #575757
+}
+
+body {
+    background-color: var(--background-color);
+}
+
+hr {
+    border: 1.5px solid var(--secondary-color);
+    margin: 1rem auto;
+    width: 90%;
+
+}
+
+/* common */
+
+.flex {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.align-left {
+    margin: 1rem 0;
+}
+
+/* sidebar */
+
+.sidebar {
+    width: 20%;
+    min-width: 200px;
+    height: 100vh;
+    background-color: var(--primary-color);
+    padding: 2rem;
+    border-radius: 0 40px 40px 0;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #FE5E2C;
+    margin-bottom: 1rem;
+}
+
+/* todo container */
+
+.todo-container {
+    width: 60%;
+    height: 100vh;
+    padding: 1.25rem 2rem;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--font-color);
+    margin-bottom: 1rem;
+}
