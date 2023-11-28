@@ -4,8 +4,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Source Sans Pro', sans-serif;
-
 }
 
 /* color variables */
@@ -14,17 +12,22 @@ html {
     --primary-color: #C3BEBA;
     --secondary-color: #575353;
     --background-color: #ECECEC;
-    --font-color: #575757
+    --font-color: #575757;
 }
+
+/* global styles */
 
 body {
     background-color: var(--background-color);
+    color: var(--font-color);
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 hr {
     border: 1.5px solid var(--secondary-color);
     margin: 1rem auto;
     width: 90%;
+    border-radius: 2px;
 
 }
 
