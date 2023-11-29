@@ -1,3 +1,5 @@
+import Task from './Task.js';
+
 export default class homePage {
     
     loadHomepage(){
@@ -37,7 +39,46 @@ export default class homePage {
         const toDoList = document.createElement('div');
         toDoContainer.appendChild(toDoList);
         toDoList.classList.add('todo-list');
-        toDoList.innerHTML = 'Tasks go here';
+        toDoList.innerHTML = 'Tasks go here';   
+    }
+
+    static createTaskHTML(task) {
+        const container = document.createElement('div');
+        container.classList.add('task-container');
         
+        const taskColor = document.createElement('div');
+        taskColor.classList.add('task-colour');
+        container.appendChild(taskColor);
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = task.getId();
+        checkbox.name = task.getId();
+        checkbox.classList.add('task-checkbox');
+        container.appendChild(checkbox);
+
+        const taskInfo = document.createElement('div');
+        taskInfo.classList.add('task-info');
+        container.appendChild(taskInfo);
+
+        const taskName = document.createElement('div');
+        taskName.classList.add('task-name');
+        taskName.textContent = task.name;
+        taskInfo.appendChild(taskName);
+
+        const taskDueDate = document.createElement('div');
+        taskDueDate.classList.add('task-due-date');
+        taskDueDate.textContent = task.dueDate;
+        taskInfo.appendChild(taskDueDate);
+
+        return container;
+    }
+
+    static addTask(name, project, description, dueDate, priority) {
+        const task = new Task(name, project, description, dueDate, priority);
+        console.log("new task: ", task);
+        const taskHTML = this.createTaskHTML(task);
+        const toDoList = document.querySelector('.todo-list');
+        toDoList.appendChild(taskHTML);
     }
 }

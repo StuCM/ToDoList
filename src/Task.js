@@ -1,11 +1,17 @@
-export class task {
-    constructor(id, name, project, description, dueDate, priority) {
-        this.id = id;
+export default class Task {
+    static idCounter = 0;
+
+    constructor(name, project, description, dueDate, priority) {
+        this.id = ++Task.idCounter;
         this.name = name;
         this.project = project;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
+    }
+
+    getId() {
+        return this.id;
     }
 
     setName(name) {
