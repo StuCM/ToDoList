@@ -1,7 +1,10 @@
 import Task from './Task.js';
-import homePageController from './controllers/homePageController.js';
+import toDoList from './toDoList.js';
+import {ProjectList, Project} from './projects.js';
 
 export default class homePage {
+
+    //HTML Creation
 
     static createHomePage() {
         const main = document.createElement('main');
@@ -19,6 +22,10 @@ export default class homePage {
 
         const line = document.createElement('hr');
         sidebar.appendChild(line);
+
+        const projectList = document.createElement('div');
+        projectList.id = 'project-list';
+        sidebar.appendChild(projectList);
 
         const toDoContainer = document.createElement('div')
         main.appendChild(toDoContainer);
@@ -41,6 +48,7 @@ export default class homePage {
     static createTaskHTML(task) {
         const container = document.createElement('div');
         container.classList.add('task-container');
+        container.id = task.getId();
         
         const taskColor = document.createElement('div');
         taskColor.classList.add('task-colour');
@@ -82,9 +90,79 @@ export default class homePage {
         deleteButton.textContent = 'D';
 
         container.addEventListener('click', (event) => {
-            homePageController.expandTask(event);
+            this.expandTask(event);
+        });
+
+        deleteButton.addEventListener('click', (event) => {
+            this.deleteTask(event);
         });
 
         return container;
+    }
+
+    static createProjectHTML(project) {
+        const container = document.createElement('div');
+        container.classList.add('flex', 'project-container');
+        container.id = project.getId();
+
+        const projectColor = document.createElement('div');
+        projectColor.classList.add('project-colour');
+        container.appendChild(projectColor);
+
+        const projectName = document.createElement('p');
+        projectName.classList.add('project-name');
+        projectName.textContent = project.name;
+        container.appendChild(projectName);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete-button', 'project');
+        container.appendChild(deleteButton);
+        deleteButton.textContent = 'D';
+
+        deleteButton.addEventListener('click', (event) => {
+            this.deleteProject(event);
+        });
+
+        return container;
+    }
+
+    //Dom Actions
+
+    static addTask(name, project, description, dueDate, priority) {
+        const task = new Task(name, project, description, dueDate, priority);
+        const taskHTML = homePage.createTaskHTML(task);
+        const toDoListContainer = document.querySelector('.todo-list');
+        toDoListContainer.appendChild(taskHTML);
+    }
+
+    static expandTask(event) {
+        const task = event.currentTarget;
+        const taskDescription = task.querySelector('.task-description');
+        if(['INPUT','BUTTON'].includes(event.target.tagName)) {
+            event.stopPropagation();
+            return;
+        }
+        taskDescription.classList.toggle('hidden');
+    }
+
+    static deleteTask(event) {
+        const task = event.currentTarget.closest('.task-container');
+        const toDoListContainer = document.querySelector('.todo-list');
+        toDoListContainer.removeChild(task);
+        toDoList.deleteTask(task.id);
+    }
+
+    static addProject(name) {
+        const project = new Project(name);
+        const projectHTML = homePage.createProjectHTML(project);
+        const container = document.querySelector('#project-list');
+        container.appendChild(projectHTML);
+    }
+
+    static deleteProject(event) {
+        const project = event.currentTarget.closest('.project-container');
+        const projectList = document.querySelector('#project-list');
+        projectList.removeChild(project);
+        ProjectList.deleteProject(project.id);
     }
 }

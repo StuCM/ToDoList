@@ -1,11 +1,15 @@
 import homePage from "./homePage";
-import homePageController from "./controllers/homePageController";
 import styles from "./css/styles.css";
+import toDoList from "./toDoList";
 
 function launchPage() {
     homePage.createHomePage();
-    homePageController.addTask("MyProject", "MyTask", "MyDescription", "MyDueDate", "MyPriority");
+    homePage.addProject("MyProject");
+    homePage.addTask("MyProject", "MyTask", "MyDescription", "MyDueDate", "MyPriority");
+    
 }
+
+
 
 launchPage();
     
