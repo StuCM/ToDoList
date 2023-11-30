@@ -38,8 +38,7 @@ export default class homePage {
 
         const toDoList = document.createElement('div');
         toDoContainer.appendChild(toDoList);
-        toDoList.classList.add('todo-list');
-        toDoList.innerHTML = 'Tasks go here';   
+        toDoList.classList.add('todo-list');  
     }
 
     static createTaskHTML(task) {
@@ -71,14 +70,20 @@ export default class homePage {
         taskDueDate.textContent = task.dueDate;
         taskInfo.appendChild(taskDueDate);
 
-        return container;
-    }
+        const taskDescription = document.createElement('div');
+        taskDescription.classList.add('task-description', 'hidden');
+        taskDescription.textContent = task.description;
+        taskInfo.appendChild(taskDescription);
 
-    static addTask(name, project, description, dueDate, priority) {
-        const task = new Task(name, project, description, dueDate, priority);
-        console.log("new task: ", task);
-        const taskHTML = this.createTaskHTML(task);
-        const toDoList = document.querySelector('.todo-list');
-        toDoList.appendChild(taskHTML);
+        const buttonContainer = document.createElement('div');
+        buttonContainer.classList.add('button-container');
+        container.appendChild(buttonContainer);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete-button');
+        buttonContainer.appendChild(deleteButton);
+        deleteButton.textContent = 'D';
+
+        return container;
     }
 }

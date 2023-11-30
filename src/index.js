@@ -1,9 +1,10 @@
 import homePage from "./homePage";
+import homePageController from "./controllers/homePageController";
 import styles from "./css/styles.css";
 
 function launchPage() {
     homePage.createHomePage();
-    homePage.addTask("MyProject", "MyTask", "MyDescription", "MyDueDate", "MyPriority");
+    homePageController.addTask("MyProject", "MyTask", "MyDescription", "MyDueDate", "MyPriority");
 }
 
 launchPage();
