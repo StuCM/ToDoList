@@ -1,10 +1,7 @@
 import Task from './Task.js';
+import homePageController from './controllers/homePageController.js';
 
 export default class homePage {
-    
-    loadHomepage(){
-        
-    }
 
     static createHomePage() {
         const main = document.createElement('main');
@@ -83,6 +80,10 @@ export default class homePage {
         deleteButton.classList.add('delete-button');
         buttonContainer.appendChild(deleteButton);
         deleteButton.textContent = 'D';
+
+        container.addEventListener('click', (event) => {
+            homePageController.expandTask(event);
+        });
 
         return container;
     }
