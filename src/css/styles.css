@@ -28,8 +28,21 @@ hr {
     margin: 1rem auto;
     width: 100%;
     border-radius: 2px;
-
 }
+
+button {
+    border: none;
+    border-radius: 0.75rem;
+    color: white;
+}
+
+button:hover {
+    background-color: #f04410;
+}
+
+button:active {
+    background-color: #d13e0a;
+}   
 
 /* common */
 
@@ -47,6 +60,21 @@ hr {
     display: none;
 }
 
+.large {
+    font-size: 2rem;
+    padding: 0.5rem 0.8rem;
+    margin-top: 1rem;
+    margin-left: auto;
+}
+
+.sticky {
+    position: sticky;
+    bottom: 0;
+}
+
+.orange {
+    background-color: #FE5E2C;
+}
 /* sidebar */
 
 .sidebar {
@@ -68,6 +96,8 @@ hr {
 /* todo container */
 
 .todo-container {
+    display: flex;
+    flex-direction: column;
     width: 60%;
     height: 100vh;
     padding: 1.25rem 2rem;
@@ -83,7 +113,7 @@ hr {
 /* task */
 
 .task-container {
-    width: max(450px, 90%);
+    width: max(450px, 100%);
     background: white;
     display: flex;
     align-items: stretch;

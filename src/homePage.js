@@ -1,6 +1,7 @@
 import Task from './Task.js';
 import toDoList from './toDoList.js';
 import {ProjectList, Project} from './projects.js';
+import addButton from './addButton.js';
 
 export default class homePage {
 
@@ -43,6 +44,10 @@ export default class homePage {
         const toDoList = document.createElement('div');
         toDoContainer.appendChild(toDoList);
         toDoList.classList.add('todo-list');  
+
+        const taskButton = new addButton("large", "orange", () => homePage.openTaskModal());
+        taskButton.button.classList.add('sticky');
+        toDoContainer.appendChild(taskButton.button);
     }
 
     static createTaskHTML(task) {
@@ -85,7 +90,7 @@ export default class homePage {
         container.appendChild(buttonContainer);
 
         const deleteButton = document.createElement('button');
-        deleteButton.classList.add('delete-button');
+        deleteButton.classList.add('delete-button', 'fa-solid', 'fa-trash');
         buttonContainer.appendChild(deleteButton);
         deleteButton.textContent = 'D';
 
@@ -115,7 +120,7 @@ export default class homePage {
         container.appendChild(projectName);
 
         const deleteButton = document.createElement('button');
-        deleteButton.classList.add('delete-button', 'project');
+        deleteButton.classList.add('delete-button', 'project', 'fa-solid', 'fa-trash');
         container.appendChild(deleteButton);
         deleteButton.textContent = 'D';
 
@@ -164,5 +169,9 @@ export default class homePage {
         const projectList = document.querySelector('#project-list');
         projectList.removeChild(project);
         ProjectList.deleteProject(project.id);
+    }
+
+    static openTaskModal() {
+        console.log('openTaskModal');
     }
 }
