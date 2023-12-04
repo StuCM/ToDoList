@@ -28,6 +28,9 @@ export default class homePage {
         projectList.id = 'project-list';
         sidebar.appendChild(projectList);
 
+        const addProjectButton = new addButton("small", "orange", () => homePage.addProject("MyProject"));
+        sidebar.appendChild(addProjectButton.button);
+
         const toDoContainer = document.createElement('div')
         main.appendChild(toDoContainer);
         toDoContainer.classList.add('todo-container')
