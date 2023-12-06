@@ -5,7 +5,7 @@ import addButton from './addButton.js';
 import Modal from './modal.js';
 
 export default class homePage {
-
+    static modal = new Modal();
     //HTML Creation
 
     static createHomePage() {
@@ -32,8 +32,7 @@ export default class homePage {
         const addProjectButton = new addButton("small", "orange", () => homePage.addProject("MyProject"));
         sidebar.appendChild(addProjectButton.button);
 
-        const modal = new Modal();
-        main.appendChild(modal.modal);
+        main.appendChild(this.modal.modal);
 
         const toDoContainer = document.createElement('div')
         main.appendChild(toDoContainer);
@@ -96,7 +95,7 @@ export default class homePage {
         buttonContainer.classList.add('button-container');
         container.appendChild(buttonContainer);
 
-        const deleteButton = document.createElement('button');
+        const deleteButton = document.createElement('a');
         deleteButton.classList.add('delete-button', 'fa-solid', 'fa-trash');
         buttonContainer.appendChild(deleteButton);
         deleteButton.textContent = 'D';
@@ -105,7 +104,7 @@ export default class homePage {
             this.expandTask(event);
         });
 
-        deleteButton.addEventListener('click', (event) => {
+        buttonContainer.addEventListener('click', (event) => {
             this.deleteTask(event);
         });
 
@@ -122,12 +121,14 @@ export default class homePage {
         projectName.textContent = project.name;
         container.appendChild(projectName);
 
-        const deleteButton = document.createElement('button');
+        const buttonContainer = document.createElement('div');
+        buttonContainer.classList.add('delete-button', 'project', 'flex');
+        const deleteButton = document.createElement('a');
         deleteButton.classList.add('delete-button', 'project', 'fa-solid', 'fa-trash');
-        container.appendChild(deleteButton);
-        deleteButton.textContent = 'D';
+        buttonContainer.appendChild(deleteButton);
+        container.appendChild(buttonContainer);
 
-        deleteButton.addEventListener('click', (event) => {
+        buttonContainer.addEventListener('click', (event) => {
             this.deleteProject(event);
         });
 
@@ -179,8 +180,7 @@ export default class homePage {
     }
 
     static openTaskModal() {
-        const modal = document.querySelector('dialog');
-        modal.showModal();
+        this.modal.showModal();
     }
     
     static selectProject(event) {

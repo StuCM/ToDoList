@@ -4,7 +4,7 @@ import { ProjectList } from "./projects";
 export default class Task {
     static idCounter = 0;
 
-    constructor(name, project, description, dueDate, priority) {
+    constructor(name, project, description, dueDate, priority = 0) {
         this.id = ++Task.idCounter;
         this.name = name;
         this.project = this.setProject(project);
@@ -25,7 +25,7 @@ export default class Task {
 
     setProject(project) {
         const projectList = ProjectList.getProject(project);
-        if (project) {
+        if (projectList) {
             return project;
         }
         console.log("Project does not exist");
