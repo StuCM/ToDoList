@@ -2,6 +2,7 @@ import Task from './Task.js';
 import toDoList from './toDoList.js';
 import {ProjectList, Project} from './projects.js';
 import addButton from './addButton.js';
+import Modal from './modal.js';
 
 export default class homePage {
 
@@ -30,6 +31,9 @@ export default class homePage {
 
         const addProjectButton = new addButton("small", "orange", () => homePage.addProject("MyProject"));
         sidebar.appendChild(addProjectButton.button);
+
+        const modal = new Modal();
+        main.appendChild(modal.modal);
 
         const toDoContainer = document.createElement('div')
         main.appendChild(toDoContainer);
@@ -113,10 +117,6 @@ export default class homePage {
         container.classList.add('flex', 'project-container');
         container.id = project.getId();
 
-        const projectColor = document.createElement('div');
-        projectColor.classList.add('project-colour');
-        container.appendChild(projectColor);
-
         const projectName = document.createElement('p');
         projectName.classList.add('project-name');
         projectName.textContent = project.name;
@@ -175,6 +175,7 @@ export default class homePage {
     }
 
     static openTaskModal() {
-        console.log('openTaskModal');
+        const modal = document.querySelector('dialog');
+        modal.showModal();
     }
 }

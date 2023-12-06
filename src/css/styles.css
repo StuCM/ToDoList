@@ -1,8 +1,6 @@
 /* css reset */
 
 *{
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
@@ -60,7 +58,7 @@ button:active {
 }
 
 .large {
-    font-size: 2rem;
+    font-size: 1.7rem;
     padding: 0.5rem 0.8rem;
     border-radius: 0.75rem;
     margin-top: 1rem;
@@ -68,7 +66,7 @@ button:active {
 }
 
 .small {
-    font-size: 1.2rem;
+    font-size: 1rem;
     padding: 0.3rem 0.5rem;
     border-radius: 0.5rem;
     margin-top: 1rem;
@@ -117,7 +115,6 @@ button:active {
     font-size: 2rem;
     font-weight: 600;
     color: var(--font-color);
-    margin-bottom: 1rem;
 }
 
 /* task */
@@ -173,6 +170,49 @@ button:active {
 
 .delete-button {
     margin-left: auto;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: auot;
+    opacity: 75%;
+}
+
+.delete-button:hover {
+    opacity: 100%;
+}
+
+/* project */
+
+.project-container {
+    width: 100%;
+}
+
+.project-name {
+    font-size: 1rem;
+    color: var(--font-color);
+}
+
+.project {
+    width: 12px;
+    height: auto;
+    color: var(--font-color);
+}
+
+
+/* modal */
+
+.modal-contaier{
+    width: 250px;
+
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+
+}
+
+dialog::backdrop {
+    backdrop-filter: blur(4px);
 }
