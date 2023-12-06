@@ -117,7 +117,7 @@ export default class homePage {
         container.classList.add('flex', 'project-container');
         container.id = project.getId();
 
-        const projectName = document.createElement('p');
+        const projectName = document.createElement('span');
         projectName.classList.add('project-name');
         projectName.textContent = project.name;
         container.appendChild(projectName);
@@ -129,6 +129,10 @@ export default class homePage {
 
         deleteButton.addEventListener('click', (event) => {
             this.deleteProject(event);
+        });
+
+        projectName.addEventListener('click', (event) => {
+            homePage.selectProject(event);
         });
 
         return container;
@@ -177,5 +181,10 @@ export default class homePage {
     static openTaskModal() {
         const modal = document.querySelector('dialog');
         modal.showModal();
+    }
+    
+    static selectProject(event) {
+        const title = document.querySelector('.title');
+        title.textContent = event.currentTarget.textContent;
     }
 }

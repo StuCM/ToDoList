@@ -182,12 +182,21 @@ button:active {
 /* project */
 
 .project-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
+    margin: 0.75rem 0;
 }
 
 .project-name {
     font-size: 1rem;
     color: var(--font-color);
+    cursor: default;
+}
+
+.project-name:hover {
+    color: #777777;
 }
 
 .project {
