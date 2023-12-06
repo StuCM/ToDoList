@@ -30,8 +30,12 @@ export default class Modal {
         const buttons = document.createElement('div');
         buttons.classList.add('modal-buttons');
         const cancelButton = document.createElement('button');
-        cancelButton.type = 'submit';
+        cancelButton.type = 'button';
         cancelButton.textContent = 'Close';
+
+        cancelButton.addEventListener('click', (event) => {
+            this.modal.close();
+        });
         const submitButton = document.createElement('button');
         submitButton.type = 'submit';
         submitButton.textContent = 'Add';
