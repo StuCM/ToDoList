@@ -72,6 +72,10 @@ export default class homePage {
         checkbox.classList.add('task-checkbox');
         container.appendChild(checkbox);
 
+        checkbox.addEventListener('change', (event) => {
+            this.toggleComplete(event);
+        })
+
         const taskInfo = document.createElement('div');
         taskInfo.classList.add('task-info');
         container.appendChild(taskInfo);
@@ -186,5 +190,10 @@ export default class homePage {
     static selectProject(event) {
         const title = document.querySelector('.title');
         title.textContent = event.currentTarget.textContent;
+    }
+
+    static toggleComplete(event) {
+        const task = event.currentTarget.closest('.task-container');
+        task.classList.toggle('task-container-checked');
     }
 }
