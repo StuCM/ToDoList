@@ -7,8 +7,9 @@ export default class toDoList {
         return this.tasks.find(task => task.id === id);
     }
 
-    static getTaskByProject(project) {
-        return this.tasks.filter(task => task.project === project);
+    static getTasksByProject(projectId) {
+        console.log(projectId, this.tasks);
+        return this.tasks.filter(task => task.project && task.project.id === projectId);
     }
 
     static getAllTasks() {

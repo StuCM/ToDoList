@@ -190,6 +190,10 @@ export default class homePage {
     static selectProject(event) {
         const title = document.querySelector('.title');
         title.textContent = event.currentTarget.textContent;
+        const project = ProjectList.getProject(event.currentTarget.textContent);
+        console.log(project);
+        const taskList = toDoList.getTasksByProject(project.id);
+        console.log(taskList);
     }
 
     static toggleComplete(event) {

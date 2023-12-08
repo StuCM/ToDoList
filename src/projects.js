@@ -11,14 +11,20 @@ export class Project {
     getId() {
         return this.id;
     }
+
+    getName() {
+        return this.name;
+    }
 }
 
 export class ProjectList {
     static projectsList = [];
 
     static getProject(name) {
-        return this.projectsList.find(project => project.name === name);
-    }
+        return this.projectsList.find(project => {
+            return project.name === name ? project : null;
+        });
+    };
 
     static getAllProjects() {
         return this.projectsList;
