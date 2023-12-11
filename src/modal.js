@@ -13,6 +13,40 @@ export default class Modal {
         const form = document.createElement('form');
         form.method = 'dialog';
         form.classList.add('modal-form');
+        
+        const buttons = document.createElement('div');
+        buttons.classList.add('modal-buttons');
+        const cancelButton = document.createElement('button');
+        cancelButton.type = 'button';
+        cancelButton.textContent = 'Close';
+
+        cancelButton.addEventListener('click', (event) => {
+            this.modal.close();
+        });
+        const submitButton = document.createElement('button');
+        submitButton.type = 'submit';
+        submitButton.textContent = 'Add';
+        buttons.append(cancelButton, submitButton,);
+        form.append(buttons);
+        modal.appendChild(form);
+
+        return modal;
+    }
+
+    clearFormContent() {
+        const form = document.querySelector('.modal-form');
+        const buttons = document.querySelector('.modal-buttons');
+
+        while (form.firstChild) {
+            form.removeChild(form.firstChild);
+        }
+
+        form.appendChild(buttons);
+    }
+
+    createTaskContent() {
+        this.clearFormContent();
+        const form = document.querySelector('.modal-form');
         const heading = document.createElement('h1');
         heading.textContent = 'Add a new task';
         const titleInput = document.createElement('input');
@@ -27,21 +61,7 @@ export default class Modal {
         const dateInput = document.createElement('input');
         dateInput.type = 'date';
         dateInput.placeholder = 'Due Date';
-        const buttons = document.createElement('div');
-        buttons.classList.add('modal-buttons');
-        const cancelButton = document.createElement('button');
-        cancelButton.type = 'button';
-        cancelButton.textContent = 'Close';
-
-        cancelButton.addEventListener('click', (event) => {
-            this.modal.close();
-        });
-        const submitButton = document.createElement('button');
-        submitButton.type = 'submit';
-        submitButton.textContent = 'Add';
-        buttons.append(cancelButton, submitButton,);
-        form.append(heading, titleInput, descriptionInput, this.projectInput, dateInput, buttons);
-        modal.appendChild(form);
+        form.prepend(heading, titleInput, descriptionInput, this.projectInput, dateInput);
 
         this.projectInput.addEventListener('change', (event) => {
             this.projectInput.style.color = this.value != '' ? 'black' : 'var(--font-color)';
@@ -52,8 +72,24 @@ export default class Modal {
             homePage.addTask(titleInput.value, this.projectInput.value, descriptionInput.value, dateInput.value);
             this.modal.close();
         })
+    }
 
-        return modal;
+    createProjectContent() {
+        this.clearFormContent();
+        const form = document.querySelector('.modal-form');
+
+        const heading = document.createElement('h1');
+        heading.textContent = 'Add a new project';
+        const titleInput = document.createElement('input');
+        titleInput.type = 'text';
+        titleInput.placeholder = 'Project Name';
+        form.prepend(heading, titleInput);
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            homePage.addProject(titleInput.value);
+            this.modal.close();
+        })
     }
 
     getProjectOptions() {  
@@ -76,9 +112,15 @@ export default class Modal {
         placeholder.selected = true;
     };
 
-    showModal() {
+    showTaskModal() {
+        this.createTaskContent();
         this.getProjectOptions();
         this.modal.showModal();
     }  
+
+    showProjectModal() {
+        this.createProjectContent();
+        this.modal.showModal();
+    }
     
 }

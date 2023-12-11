@@ -29,7 +29,7 @@ export default class homePage {
         projectList.id = 'project-list';
         sidebar.appendChild(projectList);
 
-        const addProjectButton = new addButton("small", "orange", () => homePage.addProject("MyProject"));
+        const addProjectButton = new addButton("small", "orange", () => homePage.openProjectModal());
         sidebar.appendChild(addProjectButton.button);
 
         main.appendChild(this.modal.modal);
@@ -184,7 +184,11 @@ export default class homePage {
     }
 
     static openTaskModal() {
-        this.modal.showModal();
+        this.modal.showTaskModal();
+    }
+
+    static openProjectModal() {
+        this.modal.showProjectModal();
     }
     
     static selectProject(event) {
@@ -193,7 +197,7 @@ export default class homePage {
         const project = ProjectList.getProject(event.currentTarget.textContent);
         console.log(project);
         const taskList = toDoList.getTasksByProject(project.id);
-        console.log(taskList);
+    
     }
 
     static toggleComplete(event) {
