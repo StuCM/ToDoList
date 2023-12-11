@@ -8,7 +8,6 @@ export default class toDoList {
     }
 
     static getTasksByProject(projectId) {
-        console.log(projectId, this.tasks);
         return this.tasks.filter(task => task.project && task.project.id === projectId);
     }
 

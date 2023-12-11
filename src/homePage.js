@@ -147,6 +147,10 @@ export default class homePage {
 
     static addTask(name, project, description, dueDate, priority) {
         const task = new Task(name, project, description, dueDate, priority);
+        this.renderTask(task);
+    }
+
+    static renderTask(task){
         const taskHTML = homePage.createTaskHTML(task);
         const toDoListContainer = document.querySelector('.todo-list');
         toDoListContainer.appendChild(taskHTML);
@@ -197,7 +201,16 @@ export default class homePage {
         const project = ProjectList.getProject(event.currentTarget.textContent);
         console.log(project);
         const taskList = toDoList.getTasksByProject(project.id);
-    
+        this.populateToDoList(taskList);
+        console.log(toDoList.getAllTasks());
+    }
+
+    static populateToDoList(array) {
+        const toDoListContainer = document.querySelector('.todo-list');
+        toDoListContainer.innerHTML = '';
+        array.forEach(task => {
+            this.renderTask(task);
+        });
     }
 
     static toggleComplete(event) {
