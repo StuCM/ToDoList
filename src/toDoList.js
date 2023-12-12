@@ -34,6 +34,6 @@ export default class toDoList {
     }
 
     static deleteTask(id) {
-        this.tasks = this.tasks.filter(task => task.id !== id);
+        this.tasks = this.tasks.filter(task => task.id !== Number(id));
     }
 }
