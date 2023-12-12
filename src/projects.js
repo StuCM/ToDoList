@@ -5,6 +5,8 @@ export class Project {
         this.name = name;
         this.id = Project.idCounter++;
 
+        console.log(this);
+
         ProjectList.setProject(this);
     }
 

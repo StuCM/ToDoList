@@ -7,6 +7,8 @@ export default class Modal {
         this.modal = this.buildModal();
     }
 
+    submitEventListener = null;
+
     buildModal() {
         const modal = document.createElement('dialog');
         modal.classList.add('modal-container');
@@ -41,6 +43,10 @@ export default class Modal {
             form.removeChild(form.firstChild);
         }
 
+        if(this.submitEventListener) {  
+            form.removeEventListener('submit', this.submitEventListener);
+        }
+
         form.appendChild(buttons);
     }
 
@@ -67,11 +73,13 @@ export default class Modal {
             this.projectInput.style.color = this.value != '' ? 'black' : 'var(--font-color)';
         });
 
-        form.addEventListener('submit', (event) => {
+        this.submitEventListener = (event) => {
             event.preventDefault();
             homePage.addTask(titleInput.value, this.projectInput.value, descriptionInput.value, dateInput.value);
             this.modal.close();
-        })
+        };
+
+        form.addEventListener('submit', this.submitEventListener);
     }
 
     createProjectContent() {
@@ -85,11 +93,13 @@ export default class Modal {
         titleInput.placeholder = 'Project Name';
         form.prepend(heading, titleInput);
 
-        form.addEventListener('submit', (event) => {
+        this.submitEventListener = (event) => {
             event.preventDefault();
             homePage.addProject(titleInput.value);
             this.modal.close();
-        })
+        }
+
+        form.addEventListener('submit', this.submitEventListener);
     }
 
     getProjectOptions() {  
