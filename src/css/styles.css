@@ -217,6 +217,14 @@ select {
     margin: 0.75rem 0;
 }
 
+.default {
+    justify-content: flex-start;
+}
+
+.default:last-child {
+    margin-bottom: 2rem;
+}
+
 .project-name {
     font-size: 1rem;
     color: var(--font-color);
@@ -231,6 +239,12 @@ select {
     width: 12px;
     height: auto;
     color: var(--font-color);
+}
+
+.project-icon {
+    width: 18px;
+    margin-right: 1rem;
+    margin-bottom: 0.25rem;
 }
 
 

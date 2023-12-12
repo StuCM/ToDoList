@@ -19,6 +19,20 @@ export class Project {
 
 export class ProjectList {
     static projectsList = [];
+    static defaultProjects = [
+        {
+            name:'All Tasks',
+            icon: ['fa-solid', 'fa-inbox']
+        }, 
+        {
+            name: 'Today',
+            icon: ['fa-regular', 'fa-calendar']
+        },
+        {
+            name: 'This Week',
+            icon: ['fa-regular', 'fa-calendar-days']
+        } 
+    ];
 
     static getProject(name) {
         return this.projectsList.find(project => {

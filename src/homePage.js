@@ -29,6 +29,12 @@ export default class homePage {
         projectList.id = 'project-list';
         sidebar.appendChild(projectList);
 
+        const defaultProjectContainer = document.createElement('div');
+        defaultProjectContainer.classList.add('default');
+        projectList.appendChild(defaultProjectContainer);
+
+        ProjectList.defaultProjects.forEach(project => homePage.createDefaultProjects(project.name, project.icon));
+
         const addProjectButton = new addButton("small", "orange", () => homePage.openProjectModal());
         sidebar.appendChild(addProjectButton.button);
 
@@ -115,6 +121,30 @@ export default class homePage {
         return container;
     }
 
+    static createDefaultProjects(project, icon) {   
+        const defaultContainer = document.querySelector('.default');
+        const container = document.createElement('div');
+        container.classList.add('flex', 'project-container', 'default');
+        container.id = project;
+
+        const iconContainer = document.createElement('span');
+
+        icon.forEach(icon => {
+            iconContainer.classList.add(icon, 'project', 'project-icon');
+        });
+
+        const projectName = document.createElement('span');
+        projectName.classList.add('project-name');
+        projectName.textContent = project;
+
+        container.append(iconContainer, projectName);
+
+        projectName.addEventListener('click', (event) => {
+            homePage.selectProject(event);
+        });
+        defaultContainer.appendChild(container);
+    }
+
     static createProjectHTML(project) {
         const container = document.createElement('div');
         container.classList.add('flex', 'project-container');
@@ -199,10 +229,9 @@ export default class homePage {
         const title = document.querySelector('.title');
         title.textContent = event.currentTarget.textContent;
         const project = ProjectList.getProject(event.currentTarget.textContent);
-        console.log(project);
         const taskList = toDoList.getTasksByProject(project.id);
         this.populateToDoList(taskList);
-        console.log(toDoList.getAllTasks());
+
     }
 
     static populateToDoList(array) {
