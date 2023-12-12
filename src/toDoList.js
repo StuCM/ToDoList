@@ -1,3 +1,7 @@
+import { parseISO } from "date-fns";
+import { parse } from "date-fns";
+import { compareAsc } from "date-fns";
+
 export default class toDoList {
     
     static tasks = [];
@@ -10,6 +14,16 @@ export default class toDoList {
     static getTasksByProject(projectId) {
         return this.tasks.filter(task => task.project && task.project.id === projectId);
     }
+
+    static getTasksByDate(endDateString) {
+        const endDate = new Date(endDateString);
+
+        return this.tasks.filter(task => {
+            const taskDate = parseISO(task.dueDate);
+            return compareAsc(taskDate, endDate) <= 0;
+        });
+    }
+
 
     static getAllTasks() {
         return this.tasks;

@@ -3,6 +3,8 @@ import toDoList from './toDoList.js';
 import {ProjectList, Project} from './projects.js';
 import addButton from './addButton.js';
 import Modal from './modal.js';
+import { format, nextSunday } from 'date-fns';
+import { getDay } from 'date-fns';
 
 export default class homePage {
     static modal = new Modal();
@@ -140,7 +142,7 @@ export default class homePage {
         container.append(iconContainer, projectName);
 
         projectName.addEventListener('click', (event) => {
-            homePage.selectProject(event);
+            homePage.selectDefaultProject(event);
         });
         defaultContainer.appendChild(container);
     }
@@ -226,12 +228,42 @@ export default class homePage {
     }
     
     static selectProject(event) {
+        homePage.setTitle(event)
+        const project = ProjectList.getProject(event.currentTarget.textContent);
+        if(!project) {
+            return;
+        }
+        const taskList = toDoList.getTasksByProject(project.id);
+        homePage.populateToDoList(taskList);
+    }
+
+    static selectDefaultProject(event) {
+        homePage.setTitle(event)
+
+        const today = new Date();
+        let sundayDate = '';
+        if(getDay(new Date() === 'Sunday')) {
+            sundayDate = today;
+        } else {
+            sundayDate = nextSunday(new Date());
+        }
+        
+        switch(event.currentTarget.textContent) {
+            case 'All Tasks':
+                homePage.populateToDoList(toDoList.getAllTasks());
+                break;
+            case 'Today':
+                homePage.populateToDoList(toDoList.getTasksByDate(today));
+                break;
+            case 'This Week':
+                homePage.populateToDoList(toDoList.getTasksByDate(sundayDate));
+                break;   
+        }
+    }
+
+    static setTitle(event){
         const title = document.querySelector('.title');
         title.textContent = event.currentTarget.textContent;
-        const project = ProjectList.getProject(event.currentTarget.textContent);
-        const taskList = toDoList.getTasksByProject(project.id);
-        this.populateToDoList(taskList);
-
     }
 
     static populateToDoList(array) {
