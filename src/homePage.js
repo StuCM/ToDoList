@@ -128,7 +128,7 @@ export default class homePage {
         const container = document.createElement('div');
         container.classList.add('flex', 'project-container', 'default');
         container.id = project;
-
+        
         const iconContainer = document.createElement('span');
 
         icon.forEach(icon => {
@@ -152,10 +152,13 @@ export default class homePage {
         container.classList.add('flex', 'project-container');
         container.id = project.getId();
 
+        const colourContainer = document.createElement('div');
+        colourContainer.classList.add('project-colour');
+
         const projectName = document.createElement('span');
         projectName.classList.add('project-name');
         projectName.textContent = project.name;
-        container.appendChild(projectName);
+        container.append(colourContainer, projectName);
 
         const buttonContainer = document.createElement('div');
         buttonContainer.classList.add('button-container');
@@ -163,6 +166,7 @@ export default class homePage {
         editButton.classList.add('delete-button', 'project', 'fa-solid', 'fa-edit');
         const deleteButton = document.createElement('a');
         deleteButton.classList.add('delete-button', 'project', 'fa-solid', 'fa-trash');
+
         buttonContainer.append(editButton, deleteButton);
         container.appendChild(buttonContainer);
 
