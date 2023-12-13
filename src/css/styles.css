@@ -99,11 +99,11 @@ select {
 .sidebar {
     display: flex;
     flex-direction: column;
-    width: 175px;
-    min-width: 200px;
+    width: 220px;
+    min-width: 220px;
     height: 100vh;
     background-color: var(--primary-color);
-    padding: 2rem;
+    padding: 2rem 1.5rem;
     border-radius: 0 40px 40px 0;
 }
 
@@ -198,6 +198,7 @@ select {
 
 .delete-button {
     margin-left: auto;
+    margin-right: 0.5rem;
     width: 15px;
     height: auot;
     opacity: 75%;

@@ -158,10 +158,12 @@ export default class homePage {
         container.appendChild(projectName);
 
         const buttonContainer = document.createElement('div');
-        buttonContainer.classList.add('delete-button', 'project', 'flex');
+        buttonContainer.classList.add('button-container');
+        const editButton = document.createElement('a');
+        editButton.classList.add('delete-button', 'project', 'fa-solid', 'fa-edit');
         const deleteButton = document.createElement('a');
         deleteButton.classList.add('delete-button', 'project', 'fa-solid', 'fa-trash');
-        buttonContainer.appendChild(deleteButton);
+        buttonContainer.append(editButton, deleteButton);
         container.appendChild(buttonContainer);
 
         buttonContainer.addEventListener('click', (event) => {
