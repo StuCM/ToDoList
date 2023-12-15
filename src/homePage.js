@@ -107,18 +107,33 @@ export default class homePage {
         buttonContainer.classList.add('button-container');
         container.appendChild(buttonContainer);
 
+        const editButton = document.createElement('a');
+        editButton.classList.add('delete-button', 'fa-solid', 'fa-edit');
+        editButton.id = 'edit-button';
+
         const deleteButton = document.createElement('a');
         deleteButton.classList.add('delete-button', 'fa-solid', 'fa-trash');
-        buttonContainer.appendChild(deleteButton);
-        deleteButton.textContent = 'D';
+        deleteButton.id = 'delete-button';
+        buttonContainer.append(editButton, deleteButton);
 
         container.addEventListener('click', (event) => {
-            this.expandTask(event);
+            const target = event.target.closest('[id]');
+
+            switch(target.id) {
+                case 'delete-button':
+                    this.deleteTask(event);
+                    break;
+                case 'edit-button':
+                    this.editTask(event);
+                    break;
+                default:
+                    if (event.target.classList.contains('task-container')){
+                     this.expandTask(event);
+                    }
+                    break;
+            }        
         });
 
-        buttonContainer.addEventListener('click', (event) => {
-            this.deleteTask(event);
-        });
 
         return container;
     }
@@ -170,7 +185,7 @@ export default class homePage {
         buttonContainer.append(editButton, deleteButton);
         container.appendChild(buttonContainer);
 
-        buttonContainer.addEventListener('click', (event) => {
+        deleteButton.addEventListener('click', (event) => {
             this.deleteProject(event);
         });
 
