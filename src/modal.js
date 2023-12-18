@@ -59,6 +59,7 @@ export default class Modal {
         titleInput.type = 'text';
         titleInput.id = 'title';
         titleInput.placeholder = 'Task';
+        titleInput.required = true;
         const descriptionInput = document.createElement('input');
         descriptionInput.type = 'text';
         descriptionInput.id = 'description';
@@ -126,6 +127,7 @@ export default class Modal {
         const titleInput = document.createElement('input');
         titleInput.type = 'text';
         titleInput.placeholder = 'Project Name';
+        titleInput.required = true;
         const color = document.createElement('input');
         color.type = 'color';
         inputContainer.append(titleInput, color);

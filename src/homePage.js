@@ -236,9 +236,7 @@ export default class homePage {
     //Dom Actions
 
     static addTask(name, project, description, dueDate, priority) {
-        console.log("pp", project)
         const task = new Task(name, project, description, dueDate, priority);
-        console.log(task)
         this.renderTask(task);
     }
 
