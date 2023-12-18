@@ -10,7 +10,9 @@ import '@fortawesome/fontawesome-free/js/brands'
 
 function launchPage() {
     homePage.createHomePage();
-    homePage.addTask("MyProject", "MyTask", "MyDescription", "MyDueDate", "MyPriority");
+    homePage.addProject("My Project", "#FE5E2C");
+    const now = new Date().toLocaleDateString()
+    homePage.addTask("MyTask", "My Project", "MyDescription", now, "MyPriority");
     
 }
 

@@ -71,6 +71,8 @@ export default class homePage {
         
         const taskColor = document.createElement('div');
         taskColor.classList.add('task-colour');
+        console.log(task)
+        taskColor.style.backgroundColor = task.project.colour;
         container.appendChild(taskColor);
 
         const checkbox = document.createElement('input');
