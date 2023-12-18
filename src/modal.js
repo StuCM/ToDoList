@@ -119,11 +119,17 @@ export default class Modal {
         const form = document.querySelector('.modal-form');
 
         const heading = document.createElement('h1');
+
+        const inputContainer = document.createElement('div');
+        inputContainer.classList.add('input-container');
         heading.textContent = 'Add a new project';
         const titleInput = document.createElement('input');
         titleInput.type = 'text';
         titleInput.placeholder = 'Project Name';
-        form.prepend(heading, titleInput);
+        const color = document.createElement('input');
+        color.type = 'color';
+        inputContainer.append(titleInput, color);
+        form.prepend(heading, inputContainer);
 
         this.submitEventListener = (event) => {
             event.preventDefault();

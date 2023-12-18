@@ -280,7 +280,7 @@ select {
     margin-bottom: 1rem;
 }
 
-.modal-form>input {
+.modal-form>input, .input-container>input {
     border: none;
     background-color: var(--background-color);
     margin: 0.5rem 0;
@@ -289,8 +289,18 @@ select {
     padding: 0.5rem 1rem;
 }
 
-.modal-form>input:focus {
+.modal-form>input:focus, .input-container>input:focus {
     outline: #FE5E2C 1px solid;
+}
+
+.input-container {
+    display: flex;
+    width: 100%;
+}
+
+.input-container>input:first-child{
+    width: 100%;
+    margin-right: 1rem;
 }
 
 .modal-buttons{
