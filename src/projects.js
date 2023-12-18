@@ -3,7 +3,7 @@ export class Project {
 
     constructor(name) {
         this.name = name;
-        this.id = Project.idCounter++;
+        this.id = 'project-' + Project.idCounter++;
 
         console.log(this);
 
@@ -16,6 +16,10 @@ export class Project {
 
     getName() {
         return this.name;
+    }
+
+    setName(name) {
+        this.name = name;
     }
 }
 
@@ -41,6 +45,10 @@ export class ProjectList {
             return project.name === name ? project : null;
         });
     };
+
+    static getProjectById(id) {
+        return this.projectsList.find(project => project.id === id);
+    }
 
     static getAllProjects() {
         return this.projectsList;

@@ -191,21 +191,41 @@ export default class homePage {
         buttonContainer.classList.add('button-container');
         const editButton = document.createElement('a');
         editButton.classList.add('delete-button', 'project', 'fa-solid', 'fa-edit');
+        editButton.id = 'edit-button';
         const deleteButton = document.createElement('a');
         deleteButton.classList.add('delete-button', 'project', 'fa-solid', 'fa-trash');
+        deleteButton.id = 'delete-button';
 
         buttonContainer.append(editButton, deleteButton);
         container.appendChild(buttonContainer);
 
-        deleteButton.addEventListener('click', (event) => {
-            this.deleteProject(event);
-        });
+        container.addEventListener('click', (event) => {
+            const target = event.target.closest('[id]');
 
-        projectName.addEventListener('click', (event) => {
-            homePage.selectProject(event);
+            switch(target.id) {
+                case 'delete-button':
+                    this.deleteProject(event);
+                    break;
+                case 'edit-button':
+                    homePage.editProject(event);
+                    break;
+                default:
+                    if (event.target.classList.contains('project-name')){
+                    homePage.selectProject(event);
+                    }
+                    break;
+            }        
         });
 
         return container;
+    }
+
+    static editProjectContainer(id) {
+        const projectContainer = document.querySelector(`#${id}`);
+        const project = ProjectList.getProjectById(id);
+        const projectName = projectContainer.querySelector('.project-name');
+
+        projectName.textContent = project.name;
     }
 
     //Dom Actions
@@ -251,6 +271,12 @@ export default class homePage {
         const projectHTML = homePage.createProjectHTML(project);
         const container = document.querySelector('#project-list');
         container.appendChild(projectHTML);
+    }
+
+    static editProject(event) {
+        const projectId = event.currentTarget.closest('.project-container').id;
+        const project = ProjectList.getProjectById(projectId);
+        this.modal.showEditProjectModal(project);
     }
 
     static deleteProject(event) {

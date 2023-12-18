@@ -134,6 +134,28 @@ export default class Modal {
         form.addEventListener('submit', this.submitEventListener);
     }
 
+    editProjectContent(project) {
+        this.createProjectContent();
+        const heading = document.querySelector('h1');
+        const titleInput = document.querySelector('input[type="text"]');
+
+        heading.textContent = 'Edit Project';
+        titleInput.value = project.name;
+
+        const form = document.querySelector('.modal-form');
+
+        form.removeEventListener('submit', this.submitEventListener);
+
+        this.submitEventListener = (event) => {
+            event.preventDefault();
+            project.setName(titleInput.value);
+            this.modal.close();
+            homePage.editProjectContainer(project.id);
+        };
+
+        form.addEventListener('submit', this.submitEventListener);
+    }
+
     getProjectOptions(selectedProjectName = null) {  
         const placeholder = document.createElement('option');
         placeholder.value = '';
@@ -173,6 +195,11 @@ export default class Modal {
     showEditModal(task) {
         this.editTaskContent(task);
         this.getProjectOptions(task.project?.name);
+        this.modal.showModal();
+    }
+
+    showEditProjectModal(project) {
+        this.editProjectContent(project);
         this.modal.showModal();
     }
     
