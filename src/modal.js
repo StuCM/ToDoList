@@ -94,11 +94,13 @@ export default class Modal {
         const descriptionInput = document.querySelector('#description');
         const projectInput = document.querySelector('select');
         const dateInput = document.querySelector('input[type="date"]');
+        const submitButton = document.querySelector('button[type="submit"]');
 
         heading.textContent = 'Edit Task';
         titleInput.value = task.name;
         descriptionInput.value = task.description;
         dateInput.value = task.dueDate;
+        submitButton.textContent = 'Save';
 
         const form = document.querySelector('.modal-form');
 
@@ -150,9 +152,11 @@ export default class Modal {
         this.createProjectContent();
         const heading = document.querySelector('h1');
         const titleInput = document.querySelector('input[type="text"]');
+        const submitButton = document.querySelector('button[type="submit"]');
 
         heading.textContent = 'Edit Project';
         titleInput.value = project.name;
+        submitButton.textContent = 'Save';
 
         const form = document.querySelector('.modal-form');
 
