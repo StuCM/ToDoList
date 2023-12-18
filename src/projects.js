@@ -1,8 +1,9 @@
 export class Project {
     static idCounter = 0;
 
-    constructor(name) {
+    constructor(name, colour) {
         this.name = name;
+        this.colour = colour
         this.id = 'project-' + Project.idCounter++;
 
         console.log(this);
@@ -16,6 +17,10 @@ export class Project {
 
     getName() {
         return this.name;
+    }
+
+    getColour() {
+        return this.colour;
     }
 
     setName(name) {

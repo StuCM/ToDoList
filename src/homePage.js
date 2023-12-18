@@ -266,8 +266,9 @@ export default class homePage {
         toDoList.deleteTask(task.id);
     }
 
-    static addProject(name) {
-        const project = new Project(name);
+    static addProject(name, colour) {
+        console.log(name, colour);
+        const project = new Project(name, colour);
         const projectHTML = homePage.createProjectHTML(project);
         const container = document.querySelector('#project-list');
         container.appendChild(projectHTML);

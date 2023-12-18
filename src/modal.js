@@ -133,7 +133,7 @@ export default class Modal {
 
         this.submitEventListener = (event) => {
             event.preventDefault();
-            homePage.addProject(titleInput.value);
+            homePage.addProject(titleInput.value, color.value);
             this.modal.close();
         }
 
