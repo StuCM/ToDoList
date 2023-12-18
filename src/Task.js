@@ -5,7 +5,7 @@ export default class Task {
     static idCounter = 0;
 
     constructor(name, project, description, dueDate, priority = 0) {
-        this.id = ++Task.idCounter;
+        this.id = 'task-', ++Task.idCounter;
         this.name = name;
         this.project = this.setProject(project);
         this.description = description;
@@ -25,10 +25,13 @@ export default class Task {
 
     setProject(projectName) {
         const project = ProjectList.getProject(projectName);
+        console.log
         if (project) {
-            return project;
+            this.project = project;
         }
-        console.log("Project does not exist");
+        else {
+            console.log("Project does not exist");
+        }
     }
 
     setDescription(description) {

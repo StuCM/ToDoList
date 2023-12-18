@@ -57,26 +57,58 @@ export default class Modal {
         heading.textContent = 'Add a new task';
         const titleInput = document.createElement('input');
         titleInput.type = 'text';
+        titleInput.id = 'title';
         titleInput.placeholder = 'Task';
         const descriptionInput = document.createElement('input');
         descriptionInput.type = 'text';
+        descriptionInput.id = 'description';
         descriptionInput.placeholder = 'Description';
-        this.projectInput = document.createElement('select');
-        this.projectInput.name = 'projects';
-        this.projectInput.placeholder = 'Select a Project';
+        const projectInput = document.createElement('select');
+        projectInput.name = 'projects';
+        projectInput.placeholder = 'Select a Project';
         const dateInput = document.createElement('input');
         dateInput.type = 'date';
         dateInput.placeholder = 'Due Date';
-        form.prepend(heading, titleInput, descriptionInput, this.projectInput, dateInput);
+        form.prepend(heading, titleInput, descriptionInput, projectInput, dateInput);
 
-        this.projectInput.addEventListener('change', (event) => {
-            this.projectInput.style.color = this.value != '' ? 'black' : 'var(--font-color)';
+        projectInput.addEventListener('change', (event) => {
+            projectInput.style.color = this.value != '' ? 'black' : 'var(--font-color)';
         });
 
         this.submitEventListener = (event) => {
             event.preventDefault();
             homePage.addTask(titleInput.value, this.projectInput.value, descriptionInput.value, dateInput.value);
             this.modal.close();
+        };
+
+        form.addEventListener('submit', this.submitEventListener);
+    }
+
+    editTaskContent(task) {
+        this.createTaskContent();
+        const heading = document.querySelector('h1');
+        const titleInput = document.querySelector('#title');
+        const descriptionInput = document.querySelector('#description');
+        const projectInput = document.querySelector('select');
+        const dateInput = document.querySelector('input[type="date"]');
+
+        heading.textContent = 'Edit Task';
+        titleInput.value = task.name;
+        descriptionInput.value = task.description;
+        dateInput.value = task.dueDate;
+
+        const form = document.querySelector('.modal-form');
+
+        form.removeEventListener('submit', this.submitEventListener);
+
+        this.submitEventListener = (event) => {
+            event.preventDefault();
+            task.setName(titleInput.value);
+            task.setDescription(descriptionInput.value);
+            task.setProject(projectInput.value);
+            task.setDueDate(dateInput.value);
+            this.modal.close();
+            homePage.editTaskContainer(task.id)
         };
 
         form.addEventListener('submit', this.submitEventListener);
@@ -102,14 +134,15 @@ export default class Modal {
         form.addEventListener('submit', this.submitEventListener);
     }
 
-    getProjectOptions() {  
+    getProjectOptions(selectedProjectName = null) {  
         const placeholder = document.createElement('option');
         placeholder.value = '';
         placeholder.textContent = 'Select a Project';
         placeholder.disabled = true; 
-
-        this.projectInput.appendChild(placeholder); 
         placeholder.selected = true;
+
+        this.projectInput = document.querySelector('select');
+        this.projectInput.appendChild(placeholder); 
         placeholder.hidden = true;
            
         ProjectList.getAllProjects().forEach(project => {
@@ -117,9 +150,13 @@ export default class Modal {
             option.value = project.name;
             option.textContent = project.name;
             this.projectInput.appendChild(option);
-        })
-        
-        placeholder.selected = true;
+
+            if (project.name === selectedProjectName) {
+                option.selected = true;
+                placeholder.selected = false;
+                this.projectInput.style.color = 'black';
+            }
+        });
     };
 
     showTaskModal() {
@@ -130,6 +167,12 @@ export default class Modal {
 
     showProjectModal() {
         this.createProjectContent();
+        this.modal.showModal();
+    }
+
+    showEditModal(task) {
+        this.editTaskContent(task);
+        this.getProjectOptions(task.project?.name);
         this.modal.showModal();
     }
     

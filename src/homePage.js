@@ -124,7 +124,7 @@ export default class homePage {
                     this.deleteTask(event);
                     break;
                 case 'edit-button':
-                    this.editTask(event);
+                    homePage.editTask(event);
                     break;
                 default:
                     if (event.target.classList.contains('task-container')){
@@ -136,6 +136,18 @@ export default class homePage {
 
 
         return container;
+    }
+
+    static editTaskContainer(id) {
+        const taskContainer = document.querySelector(`#${id}`);
+        const task = toDoList.getTask(id);
+        const taskName = taskContainer.querySelector('.task-name');
+        const taskDescription = taskContainer.querySelector('.task-description');
+        const taskDueDate = taskContainer.querySelector('.task-due-date');
+
+        taskName.textContent = task.name;
+        taskDescription.textContent = task.description;
+        taskDueDate.textContent = task.dueDate;
     }
 
     static createDefaultProjects(project, icon) {   
@@ -217,6 +229,14 @@ export default class homePage {
             return;
         }
         taskDescription.classList.toggle('hidden');
+    }
+
+    static editTask(event) {
+        const taskId = event.currentTarget.closest('.task-container').id;
+        const task = toDoList.getTask(taskId);
+        if(task){
+            this.modal.showEditModal(task);
+        }
     }
 
     static deleteTask(event) {
