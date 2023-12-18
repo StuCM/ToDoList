@@ -77,7 +77,7 @@ export default class Modal {
 
         this.submitEventListener = (event) => {
             event.preventDefault();
-            homePage.addTask(titleInput.value, this.projectInput.value, descriptionInput.value, new Date(dateInput.value).toLocaleDateString());
+            homePage.addTask(titleInput.value, this.projectInput.value, descriptionInput.value, dateInput.value);
             this.modal.close();
         };
 
