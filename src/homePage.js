@@ -71,7 +71,6 @@ export default class homePage {
         
         const taskColor = document.createElement('div');
         taskColor.classList.add('task-colour');
-        console.log(task)
         taskColor.style.backgroundColor = task.project?.colour ?? 'grey';
         container.appendChild(taskColor);
 
@@ -143,13 +142,16 @@ export default class homePage {
     static editTaskContainer(id) {
         const taskContainer = document.querySelector(`#${id}`);
         const task = toDoList.getTask(id);
+        console.log(task)
         const taskName = taskContainer.querySelector('.task-name');
         const taskDescription = taskContainer.querySelector('.task-description');
         const taskDueDate = taskContainer.querySelector('.task-due-date');
+        const taskColor = taskContainer.querySelector('.task-colour');
 
         taskName.textContent = task.name;
         taskDescription.textContent = task.description;
         taskDueDate.textContent = task.dueDate;
+        taskColor.style.backgroundColor = task.project?.colour;;
     }
 
     static createDefaultProjects(project, icon) {   
@@ -234,7 +236,9 @@ export default class homePage {
     //Dom Actions
 
     static addTask(name, project, description, dueDate, priority) {
+        console.log("pp", project)
         const task = new Task(name, project, description, dueDate, priority);
+        console.log(task)
         this.renderTask(task);
     }
 

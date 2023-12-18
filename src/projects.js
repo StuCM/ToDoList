@@ -6,8 +6,6 @@ export class Project {
         this.colour = colour;
         this.id = 'project-' + Project.idCounter++;
 
-        console.log(this);
-
         ProjectList.setProject(this);
     }
 

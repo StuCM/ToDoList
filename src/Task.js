@@ -26,11 +26,12 @@ export default class Task {
     setProject(projectName) {
         const project = ProjectList.getProject(projectName);
         if (project) {
-            return project;
+            this.project = project;
         }
         else {
             console.log("Project does not exist");
         }
+        return this.project;
     }
 
     setDescription(description) {
