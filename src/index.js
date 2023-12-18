@@ -4,10 +4,8 @@ import toDoList from "./toDoList";
 import { ProjectList } from "./projects";
 import { format } from 'date-fns';
 import Storage from "./Storage";
-import '@fortawesome/fontawesome-free/js/fontawesome'
 import '@fortawesome/fontawesome-free/js/solid'
 import '@fortawesome/fontawesome-free/js/regular'
-import '@fortawesome/fontawesome-free/js/brands'
 
 
 function launchPage() {
