@@ -167,7 +167,7 @@ export default class homePage {
         });
 
         const projectName = document.createElement('span');
-        projectName.classList.add('project-name');
+        projectName.classList.add('project-name', 'default-project');
         projectName.textContent = project;
 
         container.append(iconContainer, projectName);

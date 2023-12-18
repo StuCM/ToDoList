@@ -221,12 +221,16 @@ select {
     justify-content: flex-start;
 }
 
+.default-project {
+    font-size: 1rem !important;
+}
+
 .default:last-child {
     margin-bottom: 2rem;
 }
 
 .project-name {
-    font-size: 1rem;
+    font-size: 0.75rem;
     color: var(--font-color);
     cursor: default;
 }
