@@ -1,6 +1,7 @@
 import { parseISO } from "date-fns";
 import { parse } from "date-fns";
 import { compareAsc } from "date-fns";
+import Storage from "./Storage";
 
 export default class toDoList {
     
@@ -34,6 +35,11 @@ export default class toDoList {
     }
 
     static deleteTask(id) {
-        this.tasks = this.tasks.filter(task => task.id !== Number(id));
+        this.tasks = this.tasks.filter(task => task.id !== id);
+        Storage.saveToLocalStorage();
+    }
+
+    static clearAllTasks() {
+        this.tasks = [];
     }
 }

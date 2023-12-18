@@ -71,6 +71,7 @@ export default class homePage {
         
         const taskColor = document.createElement('div');
         taskColor.classList.add('task-colour');
+        console.log(task.project)
         taskColor.style.backgroundColor = task.project?.colour ?? 'grey';
         container.appendChild(taskColor);
 
@@ -236,7 +237,9 @@ export default class homePage {
     //Dom Actions
 
     static addTask(name, project, description, dueDate, priority) {
+        console.log(project)
         const task = new Task(name, project, description, dueDate, priority);
+        console.log(task)
         this.renderTask(task);
     }
 

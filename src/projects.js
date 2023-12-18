@@ -1,3 +1,4 @@
+import Storage from "./Storage";
 export class Project {
     static idCounter = 0;
 
@@ -44,9 +45,7 @@ export class ProjectList {
     ];
 
     static getProject(name) {
-        return this.projectsList.find(project => {
-            return project.name === name ? project : null;
-        });
+        return this.projectsList.find(project => project.name === name);
     };
 
     static getProjectById(id) {
@@ -63,5 +62,10 @@ export class ProjectList {
 
     static deleteProject(id) {
         this.projectsList = this.projectsList.filter(project => project.id !== id);
+        Storage.saveToLocalStorage();
+    }
+
+    static clearAllProjects() {
+        this.projectsList = [];
     }
 }

@@ -1,6 +1,7 @@
 import homePage from "./homePage";
 import { ProjectList } from "./projects";
 import Task from "./Task";
+import Storage from "./Storage";
 
 export default class Modal {
     constructor() {
@@ -79,6 +80,7 @@ export default class Modal {
         this.submitEventListener = (event) => {
             event.preventDefault();
             homePage.addTask(titleInput.value, this.projectInput.value, descriptionInput.value, dateInput.value);
+            Storage.saveToLocalStorage();
             this.modal.close();
         };
 
@@ -110,6 +112,7 @@ export default class Modal {
             task.setDueDate(dateInput.value);
             this.modal.close();
             homePage.editTaskContainer(task.id)
+            Storage.saveToLocalStorage();
         };
 
         form.addEventListener('submit', this.submitEventListener);
@@ -136,6 +139,7 @@ export default class Modal {
         this.submitEventListener = (event) => {
             event.preventDefault();
             homePage.addProject(titleInput.value, color.value);
+            Storage.saveToLocalStorage();
             this.modal.close();
         }
 
@@ -159,6 +163,7 @@ export default class Modal {
             project.setName(titleInput.value);
             this.modal.close();
             homePage.editProjectContainer(project.id);
+            Storage.saveToLocalStorage();
         };
 
         form.addEventListener('submit', this.submitEventListener);
