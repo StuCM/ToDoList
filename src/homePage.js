@@ -181,6 +181,7 @@ export default class homePage {
 
         const colourContainer = document.createElement('div');
         colourContainer.classList.add('project-colour');
+        colourContainer.style.backgroundColor = project.colour;
 
         const projectName = document.createElement('span');
         projectName.classList.add('project-name');
@@ -267,7 +268,6 @@ export default class homePage {
     }
 
     static addProject(name, colour) {
-        console.log(name, colour);
         const project = new Project(name, colour);
         const projectHTML = homePage.createProjectHTML(project);
         const container = document.querySelector('#project-list');
