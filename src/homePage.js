@@ -5,6 +5,7 @@ import addButton from './addButton.js';
 import Modal from './modal.js';
 import { format, nextSunday } from 'date-fns';
 import { getDay } from 'date-fns';
+import Storage from './Storage.js';
 
 export default class homePage {
     static modal = new Modal();
@@ -77,9 +78,13 @@ export default class homePage {
 
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
+        checkbox.checked = task.checked;
         checkbox.id = task.getId();
         checkbox.name = task.getId();
         checkbox.classList.add('task-checkbox');
+        if(checkbox.checked) {
+            container.classList.add('task-container-checked');
+        }
         container.appendChild(checkbox);
 
         checkbox.addEventListener('change', (event) => {
@@ -236,10 +241,8 @@ export default class homePage {
 
     //Dom Actions
 
-    static addTask(name, project, description, dueDate, priority) {
-        console.log(project)
-        const task = new Task(name, project, description, dueDate, priority);
-        console.log(task)
+    static addTask(name, project, description, dueDate, priority, checked) {
+        const task = new Task(name, project, description, dueDate, priority, checked);
         this.renderTask(task);
     }
 
@@ -352,5 +355,8 @@ export default class homePage {
     static toggleComplete(event) {
         const task = event.currentTarget.closest('.task-container');
         task.classList.toggle('task-container-checked');
+        const _task = toDoList.getTask(task.id);
+        _task.checked = !_task.checked;
+        Storage.saveToLocalStorage();
     }
 }

@@ -4,13 +4,14 @@ import { ProjectList } from "./projects";
 export default class Task {
     static idCounter = 0;
 
-    constructor(name, project, description, dueDate, priority = 0) {
+    constructor(name, project, description, dueDate, priority = 0, checked = false) {
         this.id = 'task-' + ++Task.idCounter;
         this.name = name;
         this.project = this.setProject(project);
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
+        this.checked = checked;
 
         toDoList.setTask(this);
     }

@@ -55,7 +55,7 @@ export default class Storage {
             }
             if (tasks) {
                 tasks.forEach(task => {
-                    homePage.addTask(task.name, task.project?.name, task.description, task.dueDate, task.priority);
+                    homePage.addTask(task.name, task.project?.name, task.description, task.dueDate, task.priority, task.checked);
                 });
             }
         }
