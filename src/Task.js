@@ -5,7 +5,7 @@ export default class Task {
     static idCounter = 0;
 
     constructor(name, project, description, dueDate, priority = 0) {
-        this.id = 'task-', ++Task.idCounter;
+        this.id = 'task-' + ++Task.idCounter;
         this.name = name;
         this.project = this.setProject(project);
         this.description = description;
